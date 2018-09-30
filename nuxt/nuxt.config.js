@@ -21,19 +21,41 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    extractCSS: true,
+    extend: (config) => {
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+ 
+      svgRule.test = /\.(png|jpe?g|gif)$/;
+ 
+      config.module.rules.push({
+        test: /\.svg$/,
+        oneOf: [
+          {
+            resourceQuery: /inline/,
+            loader: 'vue-svg-loader',
+          },
+          {
+            loader: 'file-loader',
+            query: {
+              name: 'assets/[name].[hash:8].[ext]',
+            },
+          },
+        ],
+      });
+    },
     /*
     ** Run ESLint on save
     */
-    // extend (config, { isDev, isClient }) {
-    //   if (isDev && isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
+    /* extend (config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    } */
   },
   modules: [
     '@nuxtjs/axios',
