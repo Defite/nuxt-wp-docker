@@ -1,3 +1,6 @@
+import postcssPresetEnv from 'postcss-preset-env';
+import postcssNested from 'postcss-nested';
+
 module.exports = {
   /*
   ** Headers of the page
@@ -41,6 +44,31 @@ module.exports = {
             },
           },
         ],
+      });
+
+      config.module.rules.push({
+        test: /\.(postcss)$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: (loader) => [
+                postcssPresetEnv({
+                  browsers: 'last 2 versions',
+                  /* use stage 3 features + css nesting rules */
+                  stage: 3,
+                  features: {
+                    'nesting-rules': true
+                  }
+                }),
+                postcssNested()
+              ]
+            }
+          }
+        ]
       });
     },
     /*
