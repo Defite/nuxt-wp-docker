@@ -9,4 +9,5 @@ RUN tar -xf wordpress.tar.gz
 WORKDIR /app/wordpress
 RUN cp wp-config-sample.php wp-config.php
 COPY cmd.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/cmd.sh
 CMD ["cmd.sh"]
