@@ -38,10 +38,3 @@ nuxt:
     command:
       "npm run start"
 ```
-
-## Wordpress FTP...
-You don't need it! Just open `wp-config` inside your `wp` container and add:
-
-```
-define('FS_METHOD', 'direct');
-```
