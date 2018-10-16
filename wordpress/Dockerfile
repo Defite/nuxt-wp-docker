@@ -1,13 +1,11 @@
 FROM wordpress:php7.2-fpm-alpine
 
-WORKDIR /app
-RUN apk update
-RUN apk add curl
-RUN apk add tar
-RUN curl https://wordpress.org/latest.tar.gz > wordpress.tar.gz
-RUN tar -xf wordpress.tar.gz
-WORKDIR /app/wordpress
-RUN cp wp-config-sample.php wp-config.php
+RUN apk add --no-cache curl tar \
+    && mkdir -p /app \
+    && curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz \
+    && tar -zxf wordpress.tar.gz -C /app/ \
+    && rm -rf wordpress.tar.gz \
+    && mv /app/wordpress/wp-config-sample.php /app/wordpress/wp-config.php
+
 COPY cmd.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/cmd.sh
 CMD ["cmd.sh"]
