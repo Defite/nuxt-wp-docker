@@ -8,4 +8,5 @@ RUN apk add --no-cache curl tar \
     && mv /app/wordpress/wp-config-sample.php /app/wordpress/wp-config.php
 
 COPY cmd.sh /usr/local/bin/
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 CMD ["cmd.sh"]

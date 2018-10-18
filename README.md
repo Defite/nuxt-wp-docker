@@ -1,9 +1,9 @@
 # nuxt-wp-docker
-Docker container for Wordpress (REST API) and Nuxt.js
+Docker-compose for Wordpress (REST API) and Nuxt.js
 
 ![Main page](https://user-images.githubusercontent.com/299118/45650683-bc9de700-bad7-11e8-9cb4-95c88a3cbfe8.png)
 
-## Install
+## Local install
 
 1) clone this repo
 2) cd to folder with repo
