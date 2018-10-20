@@ -1,0 +1,31 @@
+stages:
+ - deploy
+
+services:
+  - docker:dind
+
+image: docker
+
+before_script:
+  - apk add --update py-pip
+  - pip install docker-compose
+
+deploy:
+  stage: deploy
+  script:
+    - mkdir $DOCKER_CERT_PATH
+    - echo "$CA" > $DOCKER_CERT_PATH/ca.pem
+    - echo "$CLIENT_CERT" > $DOCKER_CERT_PATH/cert.pem
+    - echo "$CLIENT_KEY" > $DOCKER_CERT_PATH/key.pem
+    - docker-compose build
+    - docker-compose down
+    - docker-compose up -d --force-recreate
+    - rm -rf $DOCKER_CERT_PATH
+  only:
+    - master
+  variables:
+    DOCKER_TLS_VERIFY: "1"
+    DOCKER_HOST: "tcp://[YOUR_HOST_IP_HERE]:2376"
+    DOCKER_CERT_PATH: "certs"
+  tags:
+    - docker
