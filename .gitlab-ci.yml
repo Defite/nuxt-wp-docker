@@ -18,8 +18,7 @@ deploy:
     - echo "$CLIENT_CERT" > $DOCKER_CERT_PATH/cert.pem
     - echo "$CLIENT_KEY" > $DOCKER_CERT_PATH/key.pem
     - docker-compose build
-    - docker-compose down
-    - docker-compose up -d --force-recreate
+    - docker-compose up -d
     - rm -rf $DOCKER_CERT_PATH
   only:
     - master
