@@ -4,7 +4,7 @@ const store = () => new Vuex.Store({
 
   actions: {
     async nuxtServerInit ({ commit, state }) {
-      let meta = await this.$axios.get(state.wordpressAPI)
+      let meta = await this.$axios.get('/wp-json/wp/v2')
       commit('setMeta', meta.data)
     }
   },
@@ -21,8 +21,7 @@ const store = () => new Vuex.Store({
     meta: {
       description: '',
       name: ''
-    },
-    wordpressAPI: process.server ? 'http://wp:8080/wp-json' : "http://localhost:5000/wp-json"
+    }
   },
 
   mutations: {

@@ -87,6 +87,10 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
-  ]
+  ],
+  axios: {
+    baseURL: 'http://wp:8080',
+    browserBaseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'http://206.189.102.126:5000'
+  }
 }
 

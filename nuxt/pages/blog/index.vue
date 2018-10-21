@@ -17,13 +17,9 @@ import Header from "~/components/Header.vue";
 
 export default {
   async asyncData({ app, store, params }) {
-    const wordpressApi = `${
-      process.server ? "http://wp:8080" : "http://localhost:5000"
-    }/wp-json/wp/v2`;
-
     if (!store.state.posts.length) {
       let posts = await app.$axios.get(
-        `${wordpressApi}/posts?orderby=date&per_page=7&_embed`
+        `/wp-json/wp/v2/posts?orderby=date&per_page=7&_embed`
       );
 
       store.commit("setPosts", posts.data);

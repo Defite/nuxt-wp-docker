@@ -12,12 +12,8 @@ import Header from "~/components/Header";
 
 export default {
   async asyncData({ app, store, params }) {
-    const wordpressApi = `${
-      process.server ? "http://wp:8080" : "http://localhost:5000"
-    }/wp-json/wp/v2`;
-
     if (!store.state.page) {
-      let page = await app.$axios.get(`${wordpressApi}/pages?slug=main&_embed`);
+      let page = await app.$axios.get(`/wp-json/wp/v2/pages?slug=main&_embed`);
 
       store.commit("setPage", page.data[0]);
     }

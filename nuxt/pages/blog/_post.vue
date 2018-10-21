@@ -14,12 +14,8 @@ import BlogPost from "~/components/BlogPost";
 
 export default {
   async asyncData({ app, store, params }) {
-    const wordpressApi = `${
-      process.server ? "http://wp:8080" : "http://localhost:5000"
-    }/wp-json/wp/v2`;
-
     let post = await app.$axios.get(
-      `${wordpressApi}/posts?slug=${params.post}&_embed`
+      `/wp-json/wp/v2/posts?slug=${params.post}&_embed`
     );
 
     store.commit("setPost", post.data[0]);
