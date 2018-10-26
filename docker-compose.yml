@@ -21,6 +21,8 @@ services:
       "npm run dev"
   wp:
     build: ./wordpress
+    volumes:
+      - ./wordpress/plugins:/app/wordpress/wp-content/plugins
     depends_on:
       - db
     environment:

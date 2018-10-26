@@ -9,4 +9,5 @@ RUN apk add --no-cache curl tar \
 
 COPY cmd.sh /usr/local/bin/
 COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+ADD plugins /app/wordpress/wp-content/plugins
 CMD ["cmd.sh"]

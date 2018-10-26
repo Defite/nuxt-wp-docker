@@ -7,7 +7,7 @@ Docker-compose for Wordpress (REST API) and Nuxt.js
 
 1) clone this repo
 2) cd to folder with repo
-3) docker-compose --build
+3) docker-compose up -d
 4) open `localhost:5000/wp-admin/` and install wordpress
 5) open `localhost:5000/wp-admin/options-permalink.php` and update permalink to human readable like `/posts/%postname%`
 6) make two new pages with slug `main` and `blog`
