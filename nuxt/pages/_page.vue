@@ -27,7 +27,7 @@ export default {
 
   computed: {
     title() {
-      return getByPath('global.page.title.rendered', this.$store.state) || '';
+      return getByPath('page.title.rendered', this.$store.state) || '';
     }
   }
 };
