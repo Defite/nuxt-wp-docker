@@ -91,6 +91,13 @@ module.exports = {
   axios: {
     baseURL: 'http://wp:8080',
     browserBaseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'http://[YOUR_HOST_IP_OR_DOMAIN]:5000'
-  }
+  },
+  sentry: {
+    public_key: 'YOUR_PUBLIC_KEY',
+    project_id: 'YOUR_PROJECT_ID',
+    config: {
+      // Additional config
+    },
+  },
 }
 
