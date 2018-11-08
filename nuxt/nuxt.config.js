@@ -1,6 +1,3 @@
-import postcssPresetEnv from 'postcss-preset-env';
-import postcssNested from 'postcss-nested';
-
 module.exports = {
   /*
   ** Headers of the page
@@ -24,6 +21,17 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    postcss: {
+      plugins: {
+        'postcss-preset-env': {
+          stage: 3,
+          features: {
+            'nesting-rules': true
+          }
+        },
+        'postcss-nested': {}
+      },
+    },
     extractCSS: true,
     extend: (config) => {
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
@@ -44,31 +52,6 @@ module.exports = {
             },
           },
         ],
-      });
-
-      config.module.rules.push({
-        test: /\.(postcss)$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: (loader) => [
-                postcssPresetEnv({
-                  browsers: 'last 2 versions',
-                  /* use stage 3 features + css nesting rules */
-                  stage: 3,
-                  features: {
-                    'nesting-rules': true
-                  }
-                }),
-                postcssNested()
-              ]
-            }
-          }
-        ]
       });
     },
     /*
