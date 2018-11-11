@@ -23,14 +23,13 @@ module.exports = {
   build: {
     postcss: {
       plugins: {
-        'postcss-preset-env': {
-          stage: 3,
-          features: {
-            'nesting-rules': true
-          }
-        },
         'postcss-nested': {}
       },
+      preset: {
+        features: {
+          'nesting-rules': true
+        }
+      }
     },
     extractCSS: true,
     extend: (config) => {
