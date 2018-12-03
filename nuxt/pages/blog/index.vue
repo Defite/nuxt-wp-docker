@@ -15,6 +15,9 @@
 import Blog from "~/components/Blog.vue";
 import Header from "~/components/Header.vue";
 
+import { getByPath } from '~/helpers';
+
+
 export default {
   async asyncData({ app, store, params }) {
     if (!store.state.posts.length) {
@@ -26,7 +29,7 @@ export default {
     }
 
     if (!store.state.blog) {
-      let blog = await app.$axios.get(`${wordpressApi}/pages?slug=blog&_embed`);
+      let blog = await app.$axios.get(`/wp-json/wp/v2/pages?slug=blog&_embed`);
 
       store.commit("setBlogPage", blog.data[0]);
     }
@@ -40,7 +43,7 @@ export default {
       return this.$store.state.posts;
     },
     getFeaturedImage() {
-      return this.$store.state.blog._embedded["wp:featuredmedia"][0].source_url;
+      return getByPath('blog._embedded["wp:featuredmedia"][0].source_url', this.$store.state) || '';
     }
   }
 };

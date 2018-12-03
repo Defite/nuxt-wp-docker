@@ -9,6 +9,7 @@
 
 <script>
 import Header from "~/components/Header";
+import { getByPath } from '../helpers';
 
 export default {
   async asyncData({ app, store, params }) {
@@ -25,7 +26,7 @@ export default {
 
   computed: {
     headerImage() {
-      return this.$store.state.page._embedded["wp:featuredmedia"][0].source_url;
+      return getByPath('page._embedded["wp:featuredmedia"][0].source_url', this.$store.state) || '';
     }
   }
 };
